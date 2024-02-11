@@ -1,0 +1,219 @@
+import java.util.Scanner;
+
+public class MyProgram
+{
+    
+static Scanner keyboard = new Scanner(System.in); 
+
+private static int die1;
+private static int die2;
+private static int die3;
+private static int totalDie;
+private static int card3;
+private static int card4;
+private static int card4Suit;
+    
+    
+public static boolean evenOdd()
+{
+    System.out.println("Will the first roll be even or odd?");
+    String x = keyboard.next();
+    
+    die1 = (int)(Math.random() * 6) + 1;
+    
+    String check = "";
+    if (die1%2==0)
+    check = "even";
+    if (die1%2==1)
+    check = "odd";
+    
+    System.out.println(die1 + " (" + check + ")");
+    
+    if (x.toLowerCase().equals(check)){
+        System.out.println("Correct!");
+        return true;}    
+    
+    return false;
+}
+
+
+public static boolean higherLower()
+{
+    System.out.println("Will the total of two die be higher or lower than " + die1 + " ?");
+    String x = keyboard.next();
+    
+    die2 = (int)(Math.random() * 6) + 1;
+    die3 = (int)(Math.random() * 6) + 1;
+    totalDie = die2 + die3;
+    System.out.println("The first roll is a " + die2);
+    System.out.println("The second roll is a " + die3);
+    
+    if (x.toLowerCase().equals("higher")){
+        if (totalDie >= die1){
+            System.out.println("The total was higher!");
+            return true;}
+        
+        return false;}
+    
+    if (x.toLowerCase().equals("lower")){
+        if (die1 >= totalDie){
+            System.out.println("The total was lower!");
+            return true;}
+        
+        return false;}
+    
+    return false;
+}
+
+
+public static boolean insideOutside()
+{
+    System.out.println("If I pull a card out of a deck, will the number of the card be inside or outside " + die1 + " <--> " + totalDie + " ?");
+    String x = keyboard.next();
+    
+    card3 = (int)(Math.random() * 13) + 1;
+    System.out.println("The card is " + card3);
+    
+    if (x.toLowerCase().equals("inside")||x.toLowerCase().equals("in")){
+        if (die1 >= totalDie){
+            if (card3 <= die1){
+                if (card3 >= totalDie){
+                    System.out.println("It was inside!");
+                    return true;}
+            }
+        }
+    
+        if (totalDie >= die1){
+            if (card3 <= totalDie){
+                if (card3 >= die1){
+                    System.out.println("It was inside!");
+                    return true;}
+            }
+        }
+        
+        return false;}
+    
+    if (x.toLowerCase().equals("outside")||x.toLowerCase().equals("out")){
+        if (die1 >= totalDie){
+            if (card3 > die1 || card3 < totalDie){
+                System.out.println("It was outside!");
+                return true;}
+        }
+    
+        if (totalDie >= die1){
+            if (card3 > totalDie || card3 < die1){
+                System.out.println("It was outside!");
+                return true;}
+        }
+        
+        return false;
+    }
+    
+    return false;
+}
+
+
+public static boolean cardSuit()
+{
+    boolean lastOne = false;
+    System.out.println("Will the final card be red or black?");
+    String x = keyboard.next();
+    
+    card4 = (int)(Math.random() * 13) + 1;
+    int cardColor = (int)(Math.random() * 2) + 1;
+    
+    String check = "";
+    if (cardColor==1)
+    check = "red";
+    if (cardColor==2)
+    check = "black";
+    
+    System.out.println(card4 + " " + check);
+    
+    if (x.toLowerCase().equals(check)){
+        System.out.println("Correct! You have the color, but now the suit...");
+        lastOne = true;
+    }
+    
+
+if (lastOne==true){    
+    System.out.println("What is the suit of the final card?");
+    String y = keyboard.next();
+
+    card4Suit = (int)(Math.random() * 2) +1;
+    String suit = "";
+    
+    if (check.equals("red")){
+    if (card4Suit==1)
+    suit = "hearts";
+    if (card4Suit==2)
+    suit = "diamonds";}
+    
+    if (check.equals("black")){
+    if (card4Suit==1)
+    suit = "clubs";
+    if (card4Suit==2)
+    suit = "spades";}
+    
+    System.out.println("The final card is " + card4 +" of...");
+    System.out.println(suit.toUpperCase());
+    
+    if (y.toLowerCase().equals(suit))
+    return true;
+    
+    return false;}
+
+else
+return false;
+}
+
+
+
+public void theGame()
+{
+    boolean playGame = true;
+    
+    while (playGame){
+    if (evenOdd())
+        if (higherLower())
+            if (insideOutside()){
+                System.out.println("It all comes down to this...");
+                if (cardSuit())
+                    System.out.println("You won the game!!!");
+                else
+                System.out.println("You lost");
+            }
+            else
+            System.out.println("You lost");
+        else
+        System.out.println("You lost");
+    else
+    System.out.println("You lost");
+        
+    System.out.println("");
+    System.out.println("Would you like to play again?");
+    String x = keyboard.next();
+    
+    if (x.toLowerCase().equals("yes"))
+    playGame = true;
+
+    else
+    playGame = false;
+    
+    System.out.println("");
+    }
+    
+    System.out.println("Thanks for playing!");
+}
+    
+    
+    
+    public static void main(String[] args)
+    {
+      
+MyProgram obj = new MyProgram ();
+
+obj.theGame();
+  
+    }
+}
