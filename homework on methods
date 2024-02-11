@@ -1,0 +1,32 @@
+public class MyProgram
+{
+    
+//is Lasalle in String b?
+//if it is ... where?
+//create a new string piecing together what you need
+
+public String prepLaSalle (String b)
+{
+    String newString = "";
+    String x = b;
+    
+    if (x.indexOf("LaSalle")>-1){
+        while (x.indexOf("LaSalle")>-1){
+            newString = (x.substring(0, x.indexOf("LaSalle"))+"Prep"+x.substring(x.indexOf("LaSalle")+7, x.length()));
+            x = (x.substring(0, x.indexOf("LaSalle"))+"Prep"+x.substring(x.indexOf("LaSalle")+7, x.length()));}
+        return newString;}
+    
+    else 
+        return b;
+}
+    
+    
+    public static void main(String[] args)
+    {
+        
+MyProgram obj = new MyProgram();
+
+System.out.println(obj.prepLaSalle("LaSalle is great. We like LaSalle."));
+
+    }
+}
