@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+
+public class MyProgram
+{
+    
+public void delete (ArrayList<String> arr)
+{
+    int x = 0;
+    while (x < arr.size())
+    {
+        if (arr.get(x).equals("the"))
+            arr.remove(x);
+        else
+            x++;
+    }   
+}    
+    
+    public static void main(String[] args)
+    {
+
+MyProgram obj = new MyProgram ();
+
+ArrayList<String> test = new ArrayList<String>();
+
+test.add("the");
+test.add("eagles");
+test.add("the");
+test.add("chiefs");
+test.add("the");
+test.add("prep");
+
+System.out.println(test); //before
+obj.delete(test);
+System.out.println(test); //after
+    }
+}
